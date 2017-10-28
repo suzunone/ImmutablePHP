@@ -7,6 +7,12 @@ Immutable objectを使用すれば、意図しないオブジェクトの変更�
 
 通常であれば、初めからImmutableになるようにクラス設計を行う必要性がありますが、Immutableを使用すれば、手軽に既存オブジェクトをImmutable化する事ができます。
 
+## 簡単に使用する
+composerを使用して、非常に簡単に導入することができます。
+
+```
+composer require immutable/immutable
+```
 
 ## Immutable化(不変化)
 
