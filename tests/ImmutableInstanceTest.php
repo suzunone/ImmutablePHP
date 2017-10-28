@@ -444,7 +444,8 @@ class ImmutableInstanceTest extends TestCase
         $contents = ob_get_contents();
         ob_end_clean();
 
-        $this->assertRegExp('/protected \$mutable_instance =>/', $contents);
+        $this->assertRegExp('/mutable_instance/', $contents);
+        $this->assertRegExp('/protected/', $contents);
         $this->assertRegExp('/Example1Class/', $contents);
     }
 
