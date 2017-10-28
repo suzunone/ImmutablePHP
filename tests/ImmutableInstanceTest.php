@@ -10,10 +10,10 @@
  * @sinse Class available since Release 1.0.0
  */
 
-namespace Envi\Immutable\Test;
+namespace Immutable\Test;
 
 use Carbon\Carbon;
-use Envi\Immutable\Immutable;
+use Immutable\Immutable;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,8 +31,8 @@ use PHPUnit\Framework\TestCase;
 class ImmutableInstanceTest extends TestCase
 {
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__construct()
-     * @covers \Envi\Immutable\ImmutableInstance::__invoke()
+     * @covers \Immutable\ImmutableInstance::__construct()
+     * @covers \Immutable\ImmutableInstance::__invoke()
      */
     public function test_InvokeClass()
     {
@@ -65,7 +65,7 @@ class ImmutableInstanceTest extends TestCase
 
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__isset
+     * @covers \Immutable\ImmutableInstance::__isset
      */
     public function test_Example1Class_isset()
     {
@@ -112,7 +112,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__isset
+     * @covers \Immutable\ImmutableInstance::__isset
      */
     public function test_Example2Class_isset()
     {
@@ -161,7 +161,7 @@ class ImmutableInstanceTest extends TestCase
 
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__unset
+     * @covers \Immutable\ImmutableInstance::__unset
      */
     public function test_Example1Class_unset()
     {
@@ -208,7 +208,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__unset
+     * @covers \Immutable\ImmutableInstance::__unset
      * @expectedException \ErrorException
      */
     public function test_Example1Class_unset_error()
@@ -237,7 +237,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__call
+     * @covers \Immutable\ImmutableInstance::__call
      */
     public function test_Example1Class__call()
     {
@@ -270,7 +270,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__call
+     * @covers \Immutable\ImmutableInstance::__call
      * @expectedException \ErrorException
      */
     public function test_Example1Class__call_error()
@@ -300,7 +300,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__get()
+     * @covers \Immutable\ImmutableInstance::__get()
      */
     public function test_Example1Class_get()
     {
@@ -333,7 +333,7 @@ class ImmutableInstanceTest extends TestCase
 
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__get()
+     * @covers \Immutable\ImmutableInstance::__get()
      * @expectedException \ErrorException
      */
     public function test_Example2Class_get()
@@ -356,7 +356,7 @@ class ImmutableInstanceTest extends TestCase
 
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__set()
+     * @covers \Immutable\ImmutableInstance::__set()
      */
     public function test_Example1Class_set()
     {
@@ -390,7 +390,7 @@ class ImmutableInstanceTest extends TestCase
 
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__set()
+     * @covers \Immutable\ImmutableInstance::__set()
      */
     public function test_Example2Class_set()
     {
@@ -412,7 +412,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__set()
+     * @covers \Immutable\ImmutableInstance::__set()
      * @expectedException \ErrorException
      */
     public function test_Example2Class_set_error()
@@ -428,7 +428,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance
+     * @covers \Immutable\ImmutableInstance
      */
     public function test_Example1Class__debugInfo()
     {
@@ -448,9 +448,9 @@ class ImmutableInstanceTest extends TestCase
         $this->assertRegExp('/protected/', $contents);
         $this->assertRegExp('/Example1Class/', $contents);
     }
-    
+
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__set_state()
+     * @covers \Immutable\ImmutableInstance::__set_state()
      */
     public function test_Example1Class__set_state()
     {
@@ -484,7 +484,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__toString()
+     * @covers \Immutable\ImmutableInstance::__toString()
      */
     public function test_Example1Class_toString()
     {
@@ -505,7 +505,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__sleep()
+     * @covers \Immutable\ImmutableInstance::__sleep()
      * @expectedException \ErrorException
      */
     public function test_Example1Class_sleep()
@@ -522,7 +522,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance
+     * @covers \Immutable\ImmutableInstance
      */
     public function test_Carbon()
     {
@@ -558,7 +558,7 @@ class ImmutableInstanceTest extends TestCase
 
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance
+     * @covers \Immutable\ImmutableInstance
      */
     public function test_stdClass()
     {
@@ -585,7 +585,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance
+     * @covers \Immutable\ImmutableInstance
      * @expectedException \ErrorException
      */
     public function test_stdClass_getError()
@@ -599,7 +599,7 @@ class ImmutableInstanceTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance
+     * @covers \Immutable\ImmutableInstance
      * @expectedException \ErrorException
      */
     public function test_stdClass_setError()

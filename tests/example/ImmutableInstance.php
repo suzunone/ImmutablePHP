@@ -24,7 +24,7 @@ namespace Examples;
  * @see        https://github.com/suzunone/ImmutablePHP
  * @sinse Class available since Release 1.0.0
  */
-class ImmutableInstance extends \Envi\Immutable\ImmutableInstance implements Example1Interface
+class ImmutableInstance extends \Immutable\ImmutableInstance implements Example1Interface
 {
 
 }

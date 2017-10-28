@@ -11,7 +11,7 @@
  */
 
 
-namespace Envi\Immutable;
+namespace Immutable;
 
 use stdClass;
 

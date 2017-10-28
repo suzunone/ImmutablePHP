@@ -10,13 +10,13 @@
  * @sinse Class available since Release 1.0.0
  */
 
-namespace Envi\Immutable\Test;
+namespace Immutable\Test;
 
 
 use Carbon\Carbon;
 use DateTime;
-use Envi\Immutable\Immutable;
-use Envi\Immutable\ImmutableInstance;
+use Immutable\Immutable;
+use Immutable\ImmutableInstance;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -30,12 +30,12 @@ use PHPUnit\Framework\TestCase;
  * @link       https://github.com/suzunone/ImmutablePHP
  * @see        https://github.com/suzunone/ImmutablePHP
  * @sinse Class available since Release 1.0.0
- * @covers \Envi\Immutable\ImmutableManager
+ * @covers \Immutable\ImmutableManager
  */
 class ImmutableTest extends TestCase
 {
     /**
-     * @covers \Envi\Immutable\Immutable::freeze()
+     * @covers \Immutable\Immutable::freeze()
      * @expectedException \ErrorException
      */
     public function test_freeze_error()
@@ -44,7 +44,7 @@ class ImmutableTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__construct
+     * @covers \Immutable\ImmutableInstance::__construct
      * @expectedException \ErrorException
      */
     public function test_ImmutableInstance_error()
@@ -53,8 +53,8 @@ class ImmutableTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__construct
-     * @covers \Envi\Immutable\Immutable::freeze
+     * @covers \Immutable\ImmutableInstance::__construct
+     * @covers \Immutable\Immutable::freeze
      */
     public function test_ImmutableInstance_array()
     {
@@ -65,8 +65,8 @@ class ImmutableTest extends TestCase
 
 
     /**
-     * @covers \Envi\Immutable\ImmutableInstance::__isset
-     * @covers \Envi\Immutable\Immutable::freeze
+     * @covers \Immutable\ImmutableInstance::__isset
+     * @covers \Immutable\Immutable::freeze
      */
     public function test_Example1Class()
     {
@@ -83,8 +83,8 @@ class ImmutableTest extends TestCase
 
 
     /**
-     * @covers \Envi\Immutable\Immutable::freeze()
-     * @covers \Envi\Immutable\Immutable::thaw()
+     * @covers \Immutable\Immutable::freeze()
+     * @covers \Immutable\Immutable::thaw()
      */
     public function test_Carbon_freeze_thaw()
     {
@@ -97,7 +97,7 @@ class ImmutableTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\Immutable::isImmutable()
+     * @covers \Immutable\Immutable::isImmutable()
      */
     public function test_Carbon_freeze_isImmutable()
     {
@@ -111,7 +111,7 @@ class ImmutableTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\Immutable::instanceOf()
+     * @covers \Immutable\Immutable::instanceOf()
      */
     public function test_Carbon_instanceOf()
     {
@@ -128,7 +128,7 @@ class ImmutableTest extends TestCase
     }
 
     /**
-     * @covers \Envi\Immutable\Immutable::instanceName()
+     * @covers \Immutable\Immutable::instanceName()
      */
     public function test_Carbon_instanceName()
     {

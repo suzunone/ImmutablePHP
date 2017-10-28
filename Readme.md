@@ -4,7 +4,7 @@ Immutable object(不変オブジェクト)は、一度作成されると変更�
 
 Immutable objectを使用すれば、意図しないオブジェクトの変更を避けるため、念のためにオブジェクトをcloneしておく等と言った処理は不要となり、コードがシンプルになります。
 
-通常であれば、初めからImmutableになるようにクラス設計を行う必要性がありますが、Envi\Immutableを使用すれば、手軽に既存オブジェクトをImmutable化する事ができます。
+通常であれば、初めからImmutableになるようにクラス設計を行う必要性がありますが、Immutableを使用すれば、手軽に既存オブジェクトをImmutable化する事ができます。
 
 
 ## Immutable化(不変化)
@@ -28,7 +28,7 @@ Immutable化はとても簡単です。
 
 require 'vendor/autoload.php';
 
-use Envi\Immutable\Immutable;
+use Immutable\Immutable;
 
 $DT = new DateTime('2017-10-09 12:20:30');
 
@@ -54,7 +54,7 @@ echo $DT->format('Y-m-d H:i:s');
 `````` .php
 require 'vendor/autoload.php';
 
-use Envi\Immutable\Immutable;
+use Immutable\Immutable;
 
 $DT = new DateTime('2017-10-09 12:20:30');
 
@@ -91,7 +91,7 @@ Mutable化もとても簡単です。
 
 require 'vendor/autoload.php';
 
-use Envi\Immutable\Immutable;
+use Immutable\Immutable;
 
 $DT = new DateTime('2017-10-09 12:20:30');
 
@@ -120,15 +120,15 @@ Immutable化されたオブジェクトをは、当然ながらmutableオブジ�
 
 その為の代替手段を示します。
 
-### `Envi\Immutable\Immutable::instanceOf()`を使用する例
+### `Immutable\Immutable::instanceOf()`を使用する例
 
-以下に、`Envi\Immutable\Immutable::instanceOf()`Methodを使用して、`instanceof`の判定を行う例を用意しました。
+以下に、`Immutable\Immutable::instanceOf()`Methodを使用して、`instanceof`の判定を行う例を用意しました。
 
 `````` .php
 <?php
 require 'vendor/autoload.php';
 
-use Envi\Immutable\Immutable;
+use Immutable\Immutable;
 
 $DT = new DateTime('2017-10-09 12:20:30');
 
@@ -167,15 +167,15 @@ var_export($DT instanceof DateTime);
 
 ### Immutable Instanceクラスを作成する方法
 
-mutableなクラスと、`Envi\Immutable\ImmutableInstance`を継承した、Immutableクラスで共通のInterfaceを実装することで、
+mutableなクラスと、`Immutable\ImmutableInstance`を継承した、Immutableクラスで共通のInterfaceを実装することで、
 ネイティブのタイプヒンティングや`instanceof`を使用することができるようになります。
 
 ``` .php
 <?php
 require 'vendor/autoload.php';
 
-use Envi\Immutable\Immutable;
-use Envi\Immutable\ImmutableInstance;
+use Immutable\Immutable;
+use Immutable\ImmutableInstance;
 
 interface DateTimeClassInterface
 {

@@ -10,7 +10,7 @@
  * @sinse Class available since Release 1.0.0
  */
 
-namespace Envi\Immutable;
+namespace Immutable;
 
 /**
  * Class Immutable

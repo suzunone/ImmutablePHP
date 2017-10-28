@@ -14,12 +14,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Envi\\Immutable\\": "src/"
+      "Immutable\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Envi\\Immutable\\Tests\\": "tests/",
+      "Immutable\\Tests\\": "tests/",
       "Examples\\": "tests/example/"
     }
   },
