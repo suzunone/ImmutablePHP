@@ -448,7 +448,7 @@ class ImmutableInstanceTest extends TestCase
         $this->assertRegExp('/protected/', $contents);
         $this->assertRegExp('/Example1Class/', $contents);
     }
-
+    
     /**
      * @covers \Envi\Immutable\ImmutableInstance::__set_state()
      */
