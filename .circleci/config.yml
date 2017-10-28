@@ -27,6 +27,7 @@ jobs:
           - v1-dependencies-
 
       - run: wget https://getcomposer.org/download/1.5.2/composer.phar
+      - run: chmod 0777 ./composer.phar 
       - run: cp ./composer.phar ./composer
       - run: ./composer install -n --prefer-dist
 
