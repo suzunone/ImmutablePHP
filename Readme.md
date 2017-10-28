@@ -1,4 +1,5 @@
 # Immutable object for PHP
+[![CircleCI](https://circleci.com/gh/suzunone/ImmutablePHP.svg?style=svg)](https://circleci.com/gh/suzunone/ImmutablePHP)
 ## はじめに
 Immutable object(不変オブジェクト)は、一度作成されると変更することができないオブジェクトです。
 

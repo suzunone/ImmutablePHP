@@ -1,5 +1,5 @@
 {
-  "name": "EnviFramework/Immutable",
+  "name": "immutable/immutable",
   "description": "DI Container",
   "minimum-stability": "stable",
   "license": "proprietary",
