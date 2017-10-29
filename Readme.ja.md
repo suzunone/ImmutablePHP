@@ -18,7 +18,7 @@ composer require immutable/immutable
 
 Immutable objectは、既存のオブジェクトもしくは、配列から作成します。
 
-配列を使用した場合、内部的には\stdClassに変換されます。
+配列を使用した場合、内部的にstdClassに変換されます。
 
 Immutable objectに変えても、すべてのpublicなmethodや、propertyを利用可能です。
 
@@ -53,12 +53,46 @@ echo $DT->format('Y-m-d H:i:s');
 
 ``````
 
+
+## ImmutableElement
+stdClass（あるいは配列）をImmutable objectにした場合、最終的にはImmutableElementとして変換されます。
+
+ImmutableElementは、簡単なAPIを提供します。
+
+
+````.php
+<?php
+require 'vendor/autoload.php';
+
+use Immutable\ImmutableElement;
+
+$element1 = new ImmutableElement(['a' => 1, 'b' => 2, 'c' => 3, ]);
+$element2 = $element1->set('b', 100);
+echo $element1->get('b');
+// 2
+
+// あるいは...
+echo $element1->b;
+// 2
+
+echo $element2->get('b');
+// 100
+
+// あるいは...
+echo $element2->b;
+// 100
+````
+
+
+
+
 ###  メソッドチェーン
 
 元のオブジェクトがメソッドチェーンを利用している場合は、Method内での変更が加わった新たなImmutableオブジェクトを生成します。
 
 
 `````` .php
+<?php
 require 'vendor/autoload.php';
 
 use Immutable\Immutable;
@@ -83,6 +117,22 @@ echo $DT->modify('+10 day')->format('Y-m-d H:i:s');
 // Immutable化されたオブジェクトは変わらない
 echo $DT->format('Y-m-d H:i:s');
 // 2017-10-09 12:20:30
+``````
+
+## 再帰的なImmutable化
+配列やstdClassをImmutable化する場合、すべての子要素を再帰的に、Immutable化したいと考えることでしょう。
+
+その為の仕組みも用意されています。
+
+以下の例は多次元連想配列を、再帰的にImmutable化する例です。
+
+`````` .php
+require 'vendor/autoload.php';
+
+use Immutable\Immutable;
+
+$array_mutable = [['name' => 'Tanaka'], ['name' => 'Suzuki']];
+$array_immutable = Immutable::freezeRecursive($array_mutable);
 ``````
 
 ## Mutable化
