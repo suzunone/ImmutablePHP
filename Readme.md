@@ -52,6 +52,35 @@ echo $DT->format('Y-m-d H:i:s');
 
 ``````
 
+## ImmutableElement
+If stdClass (or array) is Immutable object, it will eventually be converted as ImmutableElement.
+
+ImmutableElement provides a simple API.
+
+
+````.php
+<?php
+require 'vendor/autoload.php';
+
+use Immutable\ImmutableElement;
+
+$element1 = new ImmutableElement(['a' => 1, 'b' => 2, 'c' => 3, ]);
+$element2 = $element1->set('b', 100);
+echo $element1->get('b');
+// 2
+
+// Or do as follows...
+echo $element1->b;
+// 2
+
+echo $element2->get('b');
+// 100
+
+// Or do as follows...
+echo $element2->b;
+// 100
+````
+
 ###  Method Chain
 
 If the original object is using a method chain, create a new Immutable object with changes in Method added.
@@ -82,6 +111,22 @@ echo $DT->modify('+10 day')->format('Y-m-d H:i:s');
 // Immutable object does not change
 echo $DT->format('Y-m-d H:i:s');
 // 2017-10-09 12:20:30
+``````
+
+# Recursive Immutable
+When Immutable an array or stdClass, you would want to recursively make all child elements Immutable.
+
+A mechanism for that purpose is also prepared.
+
+The following example is an example of recursively Immutable multidimensional associative array.
+
+`````` .php
+require 'vendor/autoload.php';
+
+use Immutable\Immutable;
+
+$array_mutable = [['name' => 'Tanaka'], ['name' => 'Suzuki']];
+$array_immutable = Immutable::freezeRecursive($array_mutable);
 ``````
 
 ## Mutable
