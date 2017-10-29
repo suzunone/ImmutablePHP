@@ -1,28 +1,34 @@
 # Immutable object for PHP
 [![CircleCI](https://circleci.com/gh/suzunone/ImmutablePHP.svg?style=svg)](https://circleci.com/gh/suzunone/ImmutablePHP)
-## はじめに
-Immutable object(不変オブジェクト)は、一度作成されると変更することができないオブジェクトです。
+## Introduction
+An Immutable object is an object that can not be changed once it is created.
 
-Immutable objectを使用すれば、意図しないオブジェクトの変更を避けるため、念のためにオブジェクトをcloneしておく等と言った処理は不要となり、コードがシンプルになります。
+Using Immutable object makes it unnecessary to clone an object for precaution in order to avoid unintentional object changes, so the code is simple.
 
-通常であれば、初めからImmutableになるようにクラス設計を行う必要性がありますが、Immutableを使用すれば、手軽に既存オブジェクトをImmutable化する事ができます。
+Normally, there is a need to design a class so that it becomes Immutable from the beginning, but if you use Immutable, you can easily make an existing object Immutable.
+
+## Easy to use
+Using composer, it can be implemented very easily.
+
+```
+composer require immutable/immutable
+```
+
+## Immutable
+Immutable objects are created from existing objects or arrays.
+
+If an array is used, it is internally converted to \ stdClass.
+
+Even if you change to Immutable object, you can use all public methods and properties.
+
+In addition, even when using a private (or protected) method or property in a public method, it also works.
 
 
-## Immutable化(不変化)
 
-Immutable objectは、既存のオブジェクトもしくは、配列から作成します。
+### A simple example
+With Immutable, Immutable objectization is very easy.
 
-配列を使用した場合、内部的には\stdClassに変換されます。
-
-Immutable objectに変えても、すべてのpublicなmethodや、propertyを利用可能です。
-
-また、publicなmethod内で、private(あるいはprotected)なmethodや、propertyを利用している場合もすべて動作します。
-
-
-
-### シンプルな例
-Immutable化はとても簡単です。
-以下の例は、DateTime オブジェクトをImmutable化しています。
+The following example imtutables a DateTime object.
 
 `````` .php
 <?php
@@ -33,7 +39,7 @@ use Immutable\Immutable;
 
 $DT = new DateTime('2017-10-09 12:20:30');
 
-// Immutable化
+// Immutable objectization 
 $DT = Immutable::freeze($DT);
 
 echo $DT->format('Y-m-d H:i:s');
@@ -43,13 +49,12 @@ $DT->modify('+10 day');
 
 echo $DT->format('Y-m-d H:i:s');
 // 2017-10-09 12:20:30
-// Immutable化しない場合は⇒2017-10-19 12:20:30
 
 ``````
 
-###  メソッドチェーン
+###  Method Chain
 
-元のオブジェクトがメソッドチェーンを利用している場合は、Method内での変更が加わった新たなImmutableオブジェクトを生成します。
+If the original object is using a method chain, create a new Immutable object with changes in Method added.
 
 
 `````` .php
@@ -59,33 +64,33 @@ use Immutable\Immutable;
 
 $DT = new DateTime('2017-10-09 12:20:30');
 
-// Immutable化
+// Immutable objectization 
 $DT = Immutable::freeze($DT);
 
 echo $DT->format('Y-m-d H:i:s');
 // 2017-10-09 12:20:30
 
-// $DT2には、+10dayされた新たなImmutableオブジェクトが代入される
+// A new Immutable object that is + 10 days is substituted for $DT2.
 $DT2 = $DT->modify('+10 day');
 echo $DT2->format('Y-m-d H:i:s');
 // 2017-10-19 12:20:30
 
-// メソッドチェーンで書く場合
+// With a method chain.
 echo $DT->modify('+10 day')->format('Y-m-d H:i:s');
 // 2017-10-19 12:20:30
 
-// Immutable化されたオブジェクトは変わらない
+// Immutable object does not change
 echo $DT->format('Y-m-d H:i:s');
 // 2017-10-09 12:20:30
 ``````
 
-## Mutable化
+## Mutable
 
-Immutable化されたオブジェクトを、mutable化する(変更可能なオブジェクトにもどす)ことも簡単です。
+It is also easy to return an immutable object to a mutable object.
 
-### シンプルな例
-Mutable化もとても簡単です。
-以下の例は、Immutable化したDateTimeオブジェクトを元に戻しています。
+### A simple example
+Mutable is also very simple.
+The following example restores the Imutableized DateTime object.
 
 `````` .php
 <?php
@@ -96,13 +101,13 @@ use Immutable\Immutable;
 
 $DT = new DateTime('2017-10-09 12:20:30');
 
-// Immutable化
+// Immutable objectization 
 $DT = Immutable::freeze($DT);
 
-// 何らかの処理
+// Some processing
 
 
-// mutable化
+// Mutable objectization 
 $DT = Immutable::thaw($DT);
 
 echo $DT->format('Y-m-d H:i:s');
@@ -117,13 +122,13 @@ echo $DT->format('Y-m-d H:i:s');
 
 ## instanceOf
 
-Immutable化されたオブジェクトをは、当然ながらmutableオブジェクトとは違うオブジェクトとなるため、ネイティブの`instanceof`演算子では、調べることができません。
+Immutable objects are naturally objects different from mutable objects, so you can not examine them with the native `instanceof` operator.
 
-その為の代替手段を示します。
+It shows an alternative means for that.
 
-### `Immutable\Immutable::instanceOf()`を使用する例
+### Example using `Immutable\Immutable::instanceOf()`
 
-以下に、`Immutable\Immutable::instanceOf()`Methodを使用して、`instanceof`の判定を行う例を用意しました。
+Here is an example of using `Immutable\Immutable::instanceOf()` Method to make an `instanceof` judgment.
 
 `````` .php
 <?php
@@ -139,23 +144,23 @@ var_export(Immutable::instanceOf($DT, DateTime::class));
 var_export($DT instanceof DateTime);
 // true
 
-// Immutable化
+// Immutable objectization 
 $DT = Immutable::freeze($DT);
 
-// クラス名は当然true
+//  class name obviously true
 var_export(Immutable::instanceOf($DT, DateTime::class));
 // true
 
-// instanceofと同じく、implementsされたインターフェイスを指定してもtrue
+// As with instanceof, even if you specify an impleted interface, it is true
 var_export(Immutable::instanceOf($DT, DateTimeInterface ::class));
 // true
 
-// 標準のinstanceofではfalseとなります
+// It is false for standard instanceof
 var_export($DT instanceof DateTime);
 // false
 
 
-// mutable化
+// Mutable objectization 
 $DT = Immutable::thaw($DT);
 var_export(Immutable::instanceOf($DT, DateTime::class));
 // true
@@ -166,10 +171,10 @@ var_export($DT instanceof DateTime);
 ``````
 
 
-### Immutable Instanceクラスを作成する方法
+### How to create Immutable Instance class
 
-mutableなクラスと、`Immutable\ImmutableInstance`を継承した、Immutableクラスで共通のInterfaceを実装することで、
-ネイティブのタイプヒンティングや`instanceof`を使用することができるようになります。
+By implementing a mutable class and a common interface in the Immutable class, which inherits from `Immutable \ ImmutableInstance`,
+You will be able to use native type hinting and `instanceof`.
 
 ``` .php
 <?php
@@ -195,7 +200,7 @@ class DateTimeImmutableInstance extends ImmutableInstance implements DateTimeCla
 {
     public function subDay(int $int) : DateTimeClassInterface
     {
-        // interfaceの中身を実装する場合はすべて以下の内容を記述して下さい
+        // When implementing the contents of interface please describe all contents below
         return call_user_func_array([$this, '__call'], [__FUNCTION__, func_get_args()]);
     }
 }
@@ -204,22 +209,22 @@ class DateTimeImmutableInstance extends ImmutableInstance implements DateTimeCla
 
 $DT = new DateTimeInstance('2017-10-09 12:20:30');
 
-// Immutable化(第二引数でクラス名を指定)
+// Immutable (specify the class name with the second argument)
 $DT = Immutable::freeze($DT, DateTimeImmutableInstance::class);
 
-// クラス名は当然true
+// Class name obviously true
 var_export(Immutable::instanceOf($DT, DateTimeInstance::class));
 // true
 
-// instanceofと同じく、implementsされたインターフェイスを指定してもtrue
+// As with instanceof, even if you specify an impleted interface, it is true
 var_export(Immutable::instanceOf($DT, DateTimeClassInterface ::class));
 // true
 
-// Interfaceは共通なのでtrueとなります
+// Since Interface is common, it is true
 var_export($DT instanceof DateTimeImmutableInstance);
 // true
 
-// タイプヒントつきの関数・メソッドも使用できます
+// Functions and methods with type hintings can also be used
 
 function example(DateTimeClassInterface $instance)
 {
@@ -230,7 +235,7 @@ echo example($DT);
 // ok
 
 
-// 実装したメソッド
+// Implemented methods
 var_export($DT->subDay(10)->format('Y-m-d H:i:s'));
 // '2017-10-19 12:20:30'
 
