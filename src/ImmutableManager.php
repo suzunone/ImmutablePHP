@@ -30,37 +30,43 @@ class ImmutableManager
 
     /**
      * @param object $instance
-     * @param ImmutableInstance $immutable
+     * @param ImmutableInstance|ImmutableInterface $immutable
+     * @param bool $is_clone
      */
-    public static function setInstance($instance, ImmutableInstance $immutable)
+    public static function setInstance($instance, ImmutableInterface $immutable, bool $is_clone = true)
     {
-        self::$instances[spl_object_hash($immutable)] = clone $instance;
+        if ($is_clone) {
+            self::$instances[spl_object_hash($immutable)] = clone $instance;
+        } else {
+            self::$instances[spl_object_hash($immutable)] = $instance;
+        }
+
     }
 
 
     /**
-     * @param ImmutableInstance $immutable
+     * @param ImmutableInterface $immutable
      * @return object
      */
-    public static function getInstance(ImmutableInstance $immutable)
+    public static function getInstance(ImmutableInterface $immutable)
     {
         return self::$instances[spl_object_hash($immutable)];
     }
 
 
     /**
-     * @param ImmutableInstance $immutable
+     * @param ImmutableInterface $immutable
      * @return object
      */
-    public static function instanceName(ImmutableInstance $immutable)
+    public static function instanceName(ImmutableInterface $immutable)
     {
         return get_class(self::$instances[spl_object_hash($immutable)]);
     }
 
     /**
-     * @param ImmutableInstance $immutable
+     * @param ImmutableInterface $immutable
      */
-    public static function removeInstance(ImmutableInstance $immutable)
+    public static function removeInstance(ImmutableInterface $immutable)
     {
         unset(self::$instances[spl_object_hash($immutable)]);
     }

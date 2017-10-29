@@ -31,35 +31,67 @@ class Immutable
      *
      * @param object|array $mutable Immutable化するオブジェクトもしくは配列
      * @param string ?$immutable_instance_name Immutable化するオブジェクト(OPTIONAL)
-     * @return ImmutableInstance Immutableオブジェクト
+     * @return ImmutableInterface Immutableオブジェクト
      */
     public static function freeze($mutable, $immutable_instance_name = null)
     {
-        if (is_array($mutable)) {
-            $instance = new \stdClass();
-            foreach ($mutable as $key => $item) {
-                $instance->$key = $item;
-            }
-        } else {
-            $instance = $mutable;
+        if (is_array($mutable) && !$immutable_instance_name) {
+            return new ImmutableElement($mutable);
+        } elseif ($mutable instanceof \stdClass && !$immutable_instance_name) {
+            return new ImmutableElement($mutable);
+        } elseif (!$immutable_instance_name) {
+            return new ImmutableInstance($mutable);
         }
 
-        if ($immutable_instance_name) {
-            return new $immutable_instance_name($instance);
-        }
-
-        return new ImmutableInstance($instance);
+        return new $immutable_instance_name($mutable);
     }
+
+
+    /**
+     * 再帰的に、Immutable化する
+     *
+     * @param $mutable
+     * @param array $immutable_instance_name
+     * @param int $limit Recursive limit
+     * @return ImmutableInterface
+     */
+    public static function freezeRecursive($mutable, $immutable_instance_name = [], $limit = 100)
+    {
+        return ImmutableElement::freezeRecursive($mutable, $immutable_instance_name, $limit);
+    }
+
+
 
     /**
      * ImmutableオブジェクトからMutableオブジェクトを取得する
      *
-     * @param ImmutableInstance $instance
-     * @return mixed Mutableオブジェクト
+     * @param ImmutableInterface $instance
+     * @return mixed|array Mutableオブジェクトか配列
      */
-    public static function thaw(ImmutableInstance $instance)
+    public static function thaw(ImmutableInterface $instance)
     {
-        return ImmutableManager::getInstance($instance);
+        $obj =  ImmutableManager::getInstance($instance);
+        if ($instance instanceof ImmutableInstance) {
+            return $obj;
+        }
+        /**
+         * @var ImmutableElement $instance
+         */
+        if (!$instance->isArray()) {
+            $res = new \stdClass();
+            foreach ($obj as $name => $item) {
+                $res->$name = $item;
+            }
+
+            return $res;
+        }
+
+        $res = [];
+        foreach ($obj as $name => $item) {
+            $res[$name] = $item;
+        }
+
+        return $res;
     }
 
     /**
@@ -72,7 +104,7 @@ class Immutable
     public static function instanceOf ($instance, string $class_name)
     {
         if (static::isImmutable($instance)) {
-            /** @var ImmutableInstance $instance */
+            /** @var ImmutableInterface $instance */
             return ImmutableManager::getInstance($instance) instanceof $class_name;
         }
 
@@ -87,7 +119,7 @@ class Immutable
      */
     public static function isImmutable($instance): bool
     {
-        return $instance instanceof ImmutableInstance;
+        return $instance instanceof ImmutableInterface;
     }
 
     /**
@@ -100,7 +132,7 @@ class Immutable
     public static function instanceName($instance)
     {
         if (static::isImmutable($instance)) {
-            /** @var ImmutableInstance $instance */
+            /** @var ImmutableInterface $instance */
             return ImmutableManager::instanceName($instance);
         }
 

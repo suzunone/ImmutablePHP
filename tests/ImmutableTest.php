@@ -16,6 +16,7 @@ namespace Immutable\Test;
 use Carbon\Carbon;
 use DateTime;
 use Immutable\Immutable;
+use Immutable\ImmutableElement;
 use Immutable\ImmutableInstance;
 use PHPUnit\Framework\TestCase;
 
@@ -50,17 +51,6 @@ class ImmutableTest extends TestCase
     public function test_ImmutableInstance_error()
     {
         new ImmutableInstance('aaaaa');
-    }
-
-    /**
-     * @covers \Immutable\ImmutableInstance::__construct
-     * @covers \Immutable\Immutable::freeze
-     */
-    public function test_ImmutableInstance_array()
-    {
-        $instance = Immutable::freeze(['aaa' => 'aaa']);
-        $this->assertInstanceOf(ImmutableInstance::class, $instance);
-        $this->assertEquals('aaa', $instance->aaa);
     }
 
 

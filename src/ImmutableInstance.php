@@ -27,7 +27,7 @@ use stdClass;
  * @see        https://github.com/suzunone/ImmutablePHP
  * @sinse Class available since Release 1.0.0
  */
-class ImmutableInstance
+class ImmutableInstance implements ImmutableInterface
 {
     protected $mutable_instance;
 
@@ -91,11 +91,6 @@ class ImmutableInstance
             return;
         } elseif (property_exists($this->mutable_instance, $key)) {
             // 存在する場合setする動き自体は行う
-            $instance2 = clone $this->mutable_instance;
-            $instance2->$key = $value;
-            return;
-        } elseif ($this->mutable_instance instanceof stdClass) {
-            // stdClassの場合setする動き自体は行う
             $instance2 = clone $this->mutable_instance;
             $instance2->$key = $value;
             return;

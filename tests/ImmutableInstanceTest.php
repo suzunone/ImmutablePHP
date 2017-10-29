@@ -14,6 +14,8 @@ namespace Immutable\Test;
 
 use Carbon\Carbon;
 use Immutable\Immutable;
+use Immutable\ImmutableElement;
+use Immutable\ImmutableInstance;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -27,6 +29,8 @@ use PHPUnit\Framework\TestCase;
  * @link       https://github.com/suzunone/ImmutablePHP
  * @see        https://github.com/suzunone/ImmutablePHP
  * @sinse Class available since Release 1.0.0
+ * @covers \Immutable\ImmutableInterface
+ * @covers \Immutable\ImmutableManager
  */
 class ImmutableInstanceTest extends TestCase
 {
@@ -523,6 +527,8 @@ class ImmutableInstanceTest extends TestCase
 
     /**
      * @covers \Immutable\ImmutableInstance
+     * @covers \Immutable\Immutable::freezeRecursive()
+     * @covers \Immutable\ImmutableElement::freezeRecursive()
      */
     public function test_Carbon()
     {
@@ -531,7 +537,8 @@ class ImmutableInstanceTest extends TestCase
         /**
          * @var Carbon $Carbon2
          */
-        $Carbon2 = Immutable::freeze($Carbon);
+        $Carbon2 = Immutable::freezeRecursive($Carbon);
+        $this->assertInstanceOf(ImmutableInstance::class, $Carbon2);
 
 
         // 生成されたオブジェクトは基本的に同じ
@@ -557,60 +564,4 @@ class ImmutableInstanceTest extends TestCase
     }
 
 
-    /**
-     * @covers \Immutable\ImmutableInstance
-     */
-    public function test_stdClass()
-    {
-        $std = new \stdClass();
-        $faker = \Faker\Factory::create('ja');
-
-        // ダミーの値を入れる
-        $std->name = $faker->name;
-
-        // スナップショットを作成するため、オブジェクトのアドレスは違うアドレスになる
-        $this->assertNotSame($std, Immutable::thaw(Immutable::freeze($std)));
-        $this->assertEquals($std, Immutable::thaw(Immutable::freeze($std)));
-
-        $std2 = Immutable::freeze($std);
-
-        $this->assertEquals($std->name, $std2->name);
-
-        $std2->name = $faker->name;
-        $this->assertEquals($std->name, $std2->name);
-
-        $std2->name = $faker->name;
-        $this->assertEquals($std->name, $std2->name);
-
-    }
-
-    /**
-     * @covers \Immutable\ImmutableInstance
-     * @expectedException \ErrorException
-     */
-    public function test_stdClass_getError()
-    {
-        $std = new \stdClass();
-
-        $std2 = Immutable::freeze($std);
-
-        $this->assertEmpty($std2->undefined_property);
-
-    }
-
-    /**
-     * @covers \Immutable\ImmutableInstance
-     * @expectedException \ErrorException
-     */
-    public function test_stdClass_setError()
-    {
-        $std = new \stdClass();
-
-        $std2 = Immutable::freeze($std);
-        $faker = \Faker\Factory::create('ja');
-        $std2->undefined_property = $faker->name;
-
-        $this->assertEmpty($std2->undefined_property);
-
-    }
 }
